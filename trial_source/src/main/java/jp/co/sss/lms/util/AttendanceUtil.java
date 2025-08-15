@@ -147,4 +147,83 @@ public class AttendanceUtil {
 		return false;
 	}
 
+	//Task.26 鈴木文太
+	/**
+	 * 時間マップの取得
+	 * 
+	 * @return 	時間マップ
+	 */
+	public LinkedHashMap<Integer, String> setTrainingHourMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 1; i < 24; i++) {
+			int Hh = i;
+			String hour;
+			if (Hh < 10) {
+				hour = "0" + Hh;
+			} else {
+				hour = "" + Hh;
+			}
+
+			map.put(i, hour);
+		}
+		return map;
+	}
+
+	/**
+	 * 分マップの取得
+	 * 
+	 * @return 分マップ
+	 */
+	public LinkedHashMap<Integer, String> setTrainingMinuteMap() {
+		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
+		map.put(null, "");
+		for (int i = 1; i < 60; i++) {
+			int min = i;
+			String minute;
+			if (min < 10) {
+				minute = "0" + min;
+			} else {
+				minute = "" + min;
+			}
+
+			map.put(i, minute);
+		}
+		return map;
+	}
+	
+	/**
+	 * 出勤時間(時間)を取得
+	 * 
+	 */
+	public String getTrainingHour(String trainingStartTime) {
+		
+		return trainingStartTime;
+	}
+	
+	/**
+	 * 出勤時間(分)を取得
+	 */
+	public String getTrainingMinute(String trainingStartTime) {
+		
+		return trainingStartTime;
+	}
+	
+	/**
+	 * 表示用出勤時間(時間)を取得
+	 */
+	public Integer getIntegerHour(Integer trainingStartHour) {
+		
+		return trainingStartHour;
+	}
+	
+	/**
+	 * 表示用出勤時間(分)を取得
+	 */
+	public Integer getIntegerMinute(String trainingStartMinute) {
+		Integer integerMinute = Integer.valueOf(trainingStartMinute) ;
+		
+		return integerMinute;
+	}
+
 }

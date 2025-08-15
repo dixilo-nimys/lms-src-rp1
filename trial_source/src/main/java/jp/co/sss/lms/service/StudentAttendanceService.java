@@ -1,6 +1,7 @@
 package jp.co.sss.lms.service;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -220,6 +221,10 @@ public class StudentAttendanceService {
 		attendanceForm.setLeaveFlg(loginUserDto.getLeaveFlg());
 		attendanceForm.setBlankTimes(attendanceUtil.setBlankTime());
 
+		//Task.26 鈴井文太
+		//時間マップと分マップの設定
+		attendanceForm.setTrainingHours(attendanceUtil.setTrainingHourMap());
+		attendanceForm.setTrainingMinutes(attendanceUtil.setTrainingMinuteMap());
 		// 途中退校している場合のみ設定
 		if (loginUserDto.getLeaveDate() != null) {
 			attendanceForm
@@ -238,6 +243,29 @@ public class StudentAttendanceService {
 			dailyAttendanceForm
 					.setTrainingStartTime(attendanceManagementDto.getTrainingStartTime());
 			dailyAttendanceForm.setTrainingEndTime(attendanceManagementDto.getTrainingEndTime());
+			//Task.26 鈴木文太
+			//出勤時間から時間と分を取得
+			if (dailyAttendanceForm.getTrainingStartTime() != null && dailyAttendanceForm.getTrainingStartTime() != ""
+					&& dailyAttendanceForm.getTrainingStartTime().length() != 0) {
+				dailyAttendanceForm.setTrainingStartHour(attendanceUtil.getTrainingHour(
+						attendanceManagementDto.getTrainingStartTime()));
+				dailyAttendanceForm.setTrainingStartMinute(attendanceUtil.getTrainingMinute(
+						attendanceManagementDto.getTrainingStartTime()));
+				//画面表示用の数値を設定
+				dailyAttendanceForm.setTrainingStartDispHour(attendanceUtil.getIntegerHour(
+						dailyAttendanceForm.getTrainingStartHour()));
+				dailyAttendanceForm.setTrainingStartDispMinute(attendanceUtil.getIntegerMinute(
+						dailyAttendanceForm.getTrainingStartMinute()));
+			} else{
+				dailyAttendanceForm.setTrainingStartHour("");
+				dailyAttendanceForm.setTrainingStartMinute("");
+				dailyAttendanceForm.setTrainingStartDispHour(null);
+				dailyAttendanceForm.setTrainingStartDispMinute(null);
+			}
+
+				
+				
+				
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
 				dailyAttendanceForm.setBlankTimeValue(String.valueOf(
@@ -332,6 +360,21 @@ public class StudentAttendanceService {
 		}
 		// 完了メッセージ
 		return messageUtil.getMessage(Constants.PROP_KEY_ATTENDANCE_UPDATE_NOTICE);
+	}
+
+	//Task.25 鈴木文太
+	//勤怠情報の未入力の件数を取得
+	public Integer getNotEnterCount(Integer lmsUserId) {
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Date trainingDate = sdf.parse(sdf.format(new Date()));
+			Integer notEnterCount = tStudentAttendanceMapper.notEnterCount(lmsUserId, Constants.DB_FLG_FALSE,
+					trainingDate);
+			return notEnterCount;
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 }
