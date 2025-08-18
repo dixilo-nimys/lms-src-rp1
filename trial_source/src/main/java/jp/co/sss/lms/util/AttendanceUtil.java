@@ -1,6 +1,8 @@
 package jp.co.sss.lms.util;
 
 import java.text.ParseException;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedHashMap;
 
@@ -22,7 +24,7 @@ public class AttendanceUtil {
 	private DateUtil dateUtil;
 	@Autowired
 	private MSectionMapper mSectionMapper;
-
+	
 	/**
 	 * SSS定時・出退勤時間を元に、遅刻早退を判定をする
 	 * 
@@ -156,7 +158,7 @@ public class AttendanceUtil {
 	public LinkedHashMap<Integer, String> setTrainingHourMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, "");
-		for (int i = 1; i < 24; i++) {
+		for (int i = 0; i < 24; i++) {
 			int Hh = i;
 			String hour;
 			if (Hh < 10) {
@@ -178,7 +180,7 @@ public class AttendanceUtil {
 	public LinkedHashMap<Integer, String> setTrainingMinuteMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, "");
-		for (int i = 1; i < 60; i++) {
+		for (int i = 0; i < 60; i++) {
 			int min = i;
 			String minute;
 			if (min < 10) {
@@ -193,37 +195,55 @@ public class AttendanceUtil {
 	}
 	
 	/**
-	 * 出勤時間(時間)を取得
+	 * 時間(時間)を取得
 	 * 
+	 * @return 数値型時間
 	 */
-	public String getTrainingHour(String trainingStartTime) {
+	public Integer getTrainingHour(String trainingStartTime) {
 		
-		return trainingStartTime;
-	}
-	
-	/**
-	 * 出勤時間(分)を取得
-	 */
-	public String getTrainingMinute(String trainingStartTime) {
-		
-		return trainingStartTime;
-	}
-	
-	/**
-	 * 表示用出勤時間(時間)を取得
-	 */
-	public Integer getIntegerHour(Integer trainingStartHour) {
-		
-		return trainingStartHour;
-	}
-	
-	/**
-	 * 表示用出勤時間(分)を取得
-	 */
-	public Integer getIntegerMinute(String trainingStartMinute) {
-		Integer integerMinute = Integer.valueOf(trainingStartMinute) ;
-		
-		return integerMinute;
-	}
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		LocalTime time = LocalTime.parse(trainingStartTime, formatter);
 
+		Integer IntegerHour = time.getHour();
+		
+		return IntegerHour;
+	}
+	
+	/**
+	 * 時間(分)を取得
+	 * 
+	 * @return 数値型分
+	 */
+	public Integer getTrainingMinute(String trainingStartTime) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+		LocalTime time = LocalTime.parse(trainingStartTime, formatter);
+
+		Integer IntegerMinute = time.getMinute();
+		
+		return IntegerMinute;
+	}
+	
+	/**
+	 * 表示用時間(時間)を取得
+	 * 
+	 * @return 表示用時間
+	 */
+	public String getTrainingHourValue(Integer trainingStartHour) {
+		String StringHour = String.valueOf(trainingStartHour) ;
+		
+		return StringHour ;
+	}
+	
+	/**
+	 * 表示用時間(分)を取得
+	 * 
+	 * @return 表示用分
+	 */
+	public String getTrainingMinuteValue(Integer trainingStartMinute) {
+		String StringMinute = String.valueOf(trainingStartMinute) ;
+		
+		return StringMinute;
+	}
+	
+	
 }

@@ -252,20 +252,40 @@ public class StudentAttendanceService {
 				dailyAttendanceForm.setTrainingStartMinute(attendanceUtil.getTrainingMinute(
 						attendanceManagementDto.getTrainingStartTime()));
 				//画面表示用の数値を設定
-				dailyAttendanceForm.setTrainingStartDispHour(attendanceUtil.getIntegerHour(
+				dailyAttendanceForm.setTrainingStartDispHour(attendanceUtil.getTrainingHourValue(
 						dailyAttendanceForm.getTrainingStartHour()));
-				dailyAttendanceForm.setTrainingStartDispMinute(attendanceUtil.getIntegerMinute(
+				dailyAttendanceForm.setTrainingStartDispMinute(attendanceUtil.getTrainingMinuteValue(
 						dailyAttendanceForm.getTrainingStartMinute()));
-			} else{
-				dailyAttendanceForm.setTrainingStartHour("");
-				dailyAttendanceForm.setTrainingStartMinute("");
-				dailyAttendanceForm.setTrainingStartDispHour(null);
-				dailyAttendanceForm.setTrainingStartDispMinute(null);
+			} else {
+				dailyAttendanceForm.setTrainingStartHour(null);
+				dailyAttendanceForm.setTrainingStartMinute(null);
+				dailyAttendanceForm.setTrainingStartDispHour("");
+				dailyAttendanceForm.setTrainingStartDispMinute("");
 			}
 
-				
-				
-				
+			//退勤時間の分割
+			if (dailyAttendanceForm.getTrainingEndTime() != null &&
+					dailyAttendanceForm.getTrainingEndTime() != "" &&
+					dailyAttendanceForm.getTrainingEndTime().length() != 0) {
+				//退勤時間（時）
+				dailyAttendanceForm.setTrainingEndHour(attendanceUtil.getTrainingHour(
+						attendanceManagementDto.getTrainingEndTime()));
+				//退勤時間（分）
+				dailyAttendanceForm.setTrainingEndMinute(attendanceUtil.getTrainingMinute(
+						attendanceManagementDto.getTrainingEndTime()));
+				//画面表示用の設定(時と分)				
+				dailyAttendanceForm.setTrainingEndDispHour(attendanceUtil.getTrainingHourValue(
+						dailyAttendanceForm.getTrainingEndHour()));
+				dailyAttendanceForm.setTrainingEndDispMinute(attendanceUtil.getTrainingHourValue(
+						dailyAttendanceForm.getTrainingEndMinute()));
+			} else {
+				dailyAttendanceForm.setTrainingEndHour(null);
+				dailyAttendanceForm.setTrainingEndMinute(null);
+				dailyAttendanceForm.setTrainingEndDispHour("");
+				dailyAttendanceForm.setTrainingEndDispMinute("");
+			}
+			//Task.26
+
 			if (attendanceManagementDto.getBlankTime() != null) {
 				dailyAttendanceForm.setBlankTime(attendanceManagementDto.getBlankTime());
 				dailyAttendanceForm.setBlankTimeValue(String.valueOf(
@@ -321,14 +341,32 @@ public class StudentAttendanceService {
 			}
 			tStudentAttendance.setLmsUserId(lmsUserId);
 			tStudentAttendance.setAccountId(loginUserDto.getAccountId());
+			// Task.26 鈴木文太
+			//			時間と分を結合して出力
 			// 出勤時刻整形
 			TrainingTime trainingStartTime = null;
-			trainingStartTime = new TrainingTime(dailyAttendanceForm.getTrainingStartTime());
-			tStudentAttendance.setTrainingStartTime(trainingStartTime.getFormattedString());
+			if (dailyAttendanceForm.getTrainingStartHour() != null
+					&& dailyAttendanceForm.getTrainingStartMinute() != null) {
+				dailyAttendanceForm.setTrainingStartTime(dailyAttendanceForm.getTrainingStartHour() + ":"
+						+ dailyAttendanceForm.getTrainingStartMinute());
+				trainingStartTime = new TrainingTime(dailyAttendanceForm.getTrainingStartTime());
+				tStudentAttendance.setTrainingStartTime(trainingStartTime.getFormattedString());
+			} else {
+				tStudentAttendance.setTrainingStartTime("");
+			}
+
 			// 退勤時刻整形
 			TrainingTime trainingEndTime = null;
-			trainingEndTime = new TrainingTime(dailyAttendanceForm.getTrainingEndTime());
-			tStudentAttendance.setTrainingEndTime(trainingEndTime.getFormattedString());
+			if (dailyAttendanceForm.getTrainingEndHour() != null
+					&& dailyAttendanceForm.getTrainingEndMinute() != null) {
+				dailyAttendanceForm.setTrainingEndTime(dailyAttendanceForm.getTrainingEndHour() + ":"
+						+ dailyAttendanceForm.getTrainingEndMinute());
+				trainingEndTime = new TrainingTime(dailyAttendanceForm.getTrainingEndTime());
+				tStudentAttendance.setTrainingEndTime(trainingEndTime.getFormattedString());
+			} else {
+				tStudentAttendance.setTrainingEndTime("");
+			}
+
 			// 中抜け時間
 			tStudentAttendance.setBlankTime(dailyAttendanceForm.getBlankTime());
 			// 遅刻早退ステータス
