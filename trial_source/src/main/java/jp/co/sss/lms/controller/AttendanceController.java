@@ -79,7 +79,7 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-		return "attendance/detail";
+		return "redirect:/attendance/detail";
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-		return "attendance/detail";
+		return "redirect:/attendance/detail";
 	}
 
 	/**
@@ -122,6 +122,7 @@ public class AttendanceController {
 		// 勤怠フォームの生成
 		AttendanceForm attendanceForm = studentAttendanceService
 				.setAttendanceForm(attendanceManagementDtoList);
+		//		attendanceForm = attendanceUtil.getStatus(null, null);
 		model.addAttribute("attendanceForm", attendanceForm);
 
 		return "attendance/update";
@@ -139,16 +140,7 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
-		
-		//更新前のチェック
-		result = studentAttendanceService.updateCheck(attendanceForm, result);
-		if (attendanceForm.getErrorList() != null) {
-			model.addAttribute("errorList", attendanceForm.getErrorList());
-		}
-		System.out.println(result.getObjectName());
-		System.out.println(result.getErrorCount());
-		model.addAttribute("errorCount", result.getErrorCount());
-		
+
 		// 更新
 		if (result.hasErrors()) {
 
@@ -165,13 +157,13 @@ public class AttendanceController {
 		} else {
 			String message = studentAttendanceService.update(attendanceForm);
 			model.addAttribute("message", message);
-		}
 			// 一覧の再取得
 			List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 			model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-			return "attendance/detail";
+			return "redirect:/attendance/detail";
+		}
 	}
 
 }

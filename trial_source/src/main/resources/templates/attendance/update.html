@@ -7,12 +7,11 @@
 </head>
 
 <body>
-	
 
 	<th:block th:if="${session.loginUserDto.role == '0001'}">
 		<h2>勤怠管理</h2>
 	</th:block>
-	
+
 	<!--	 エラーメッセージ -->
 	<th:block th:if="${errorCount != 0}" id="error">
 		<ul style="padding-left: 0; list-style: none;" th:each="errors :${errorList}">
@@ -66,8 +65,8 @@
 							<td class="w300">[[${dailyAttendanceForm.sectionName}]]</td>
 							<!--								Task.26-->
 							<!--								出勤時間、退勤時間をプルダウンリスト化-->
-							<td class="w240">
-								<div class="form-inline">
+							<td class="w70">
+								<div class="display:inline-flex">
 									<!--									<input type="text" th:name="|attendanceList[${stat.index}].trainingStartTime|"-->
 									<!--									th:value="${dailyAttendanceForm.trainingStartTime}" class="form-control" />-->
 									<select th:name="|attendanceList[${stat.index}].trainingStartHour|"
@@ -77,7 +76,7 @@
 											th:selected="${trainingStartHour.key == dailyAttendanceForm.trainingStartHour}">
 											[[${trainingStartHour.value}]]</option>
 									</select>
-									<span>:</span>
+									<span class="me-2">:</span>
 									<select th:name="|attendanceList[${stat.index}].trainingStartMinute|"
 										class="form-control">
 										<option th:each="trainingStartMinute : ${attendanceForm.trainingMinutes}"
@@ -87,12 +86,12 @@
 									</select>
 								</div>
 							</td>
-							<td class="w240">
-								<div class="form-inline">
+							<td class="w70">
+								<div class="d-flex">
 									<!--									<input type="text" th:name="|attendanceList[${stat.index}].trainingEndTime|"-->
 									<!--									th:value="${dailyAttendanceForm.trainingEndTime}" class="form-control" />-->
 									<select th:name="|attendanceList[${stat.index}].trainingEndHour|"
-										class="form-control">
+										class="form-control me-2">
 										<option th:each="trainingEndHour : ${attendanceForm.trainingHours}"
 											th:value="${trainingEndHour.key}" th:inlne="text" class="form-control"
 											th:selected="${trainingEndHour.key == dailyAttendanceForm.trainingEndHour}">
