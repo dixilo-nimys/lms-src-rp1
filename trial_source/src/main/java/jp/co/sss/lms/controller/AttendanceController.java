@@ -79,7 +79,7 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-		return "redirect:/attendance/detail";
+		return "attendance/detail";
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class AttendanceController {
 				.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 		model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-		return "redirect:/attendance/detail";
+		return "attendance/detail";
 	}
 
 	/**
@@ -140,6 +140,16 @@ public class AttendanceController {
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
 	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
 			throws ParseException {
+		
+		//Tak.27
+		//更新前のチェック
+		result = studentAttendanceService.updateCheck(attendanceForm, result);
+		if (attendanceForm.getErrorList() != null) {
+			model.addAttribute("errorList", attendanceForm.getErrorList());
+		}
+		System.out.println(result.getObjectName());
+		System.out.println(result.getErrorCount());
+		model.addAttribute("errorCount", result.getErrorCount());
 
 		// 更新
 		if (result.hasErrors()) {
@@ -162,7 +172,7 @@ public class AttendanceController {
 					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 			model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
-			return "redirect:/attendance/detail";
+			return "attendance/detail";
 		}
 	}
 

@@ -194,15 +194,16 @@ public class AttendanceUtil {
 		return map;
 	}
 	
+	//出勤時間
 	/**
 	 * 時間(時間)を取得
 	 * 
 	 * @return 数値型時間
 	 */
-	public Integer getTrainingHour(String trainingStartTime) {
+	public Integer getHour(String trainingTime) {
 		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-		LocalTime time = LocalTime.parse(trainingStartTime, formatter);
+		LocalTime time = LocalTime.parse(trainingTime, formatter);
 
 		Integer IntegerHour = time.getHour();
 		
@@ -214,9 +215,9 @@ public class AttendanceUtil {
 	 * 
 	 * @return 数値型分
 	 */
-	public Integer getTrainingMinute(String trainingStartTime) {
+	public Integer getMinute(String trainingTime) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-		LocalTime time = LocalTime.parse(trainingStartTime, formatter);
+		LocalTime time = LocalTime.parse(trainingTime, formatter);
 
 		Integer IntegerMinute = time.getMinute();
 		
@@ -228,8 +229,8 @@ public class AttendanceUtil {
 	 * 
 	 * @return 表示用時間
 	 */
-	public String getTrainingHourValue(Integer trainingStartHour) {
-		String StringHour = String.valueOf(trainingStartHour) ;
+	public String getTrainingHourValue(Integer trainingHour) {
+		String StringHour = String.valueOf(trainingHour) ;
 		
 		return StringHour ;
 	}
@@ -239,11 +240,10 @@ public class AttendanceUtil {
 	 * 
 	 * @return 表示用分
 	 */
-	public String getTrainingMinuteValue(Integer trainingStartMinute) {
-		String StringMinute = String.valueOf(trainingStartMinute) ;
+	public String getTrainingMinuteValue(Integer trainingMinute) {
+		String StringMinute = String.valueOf(trainingMinute) ;
 		
 		return StringMinute;
 	}
-	
 	
 }
