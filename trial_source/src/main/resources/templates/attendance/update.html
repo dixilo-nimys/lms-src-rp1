@@ -70,9 +70,7 @@
 								<!--出勤時間、退勤時間をプルダウンリスト化-->
 								<td class="w240">
 									<div class="form-inline">
-
-										<!--<select th:name="|attendanceList[${stat.index}].trainingStartHour|"-->
-										<select th:field="*{attendanceList[__${stat.index}__].trainingStartHour}"
+										<select th:name="|attendanceList[${stat.index}].trainingStartHour|"
 											class="form-control" th:errorclass=" errorInput">
 											<option th:each="trainingStartHour : ${attendanceForm.trainingHours}"
 												th:value="${trainingStartHour.key}" th:inline="text"
@@ -83,9 +81,8 @@
 											</option>
 										</select>
 										<span>:</span>
-										<!--<select th:name="|attendanceList[${stat.index}].trainingStartMinute|"-->
-										<select th:field="*{attendanceList[__${stat.index}__].trainingStartMinute}"
-											class="form-control" th:errorclass=" errorInput">
+										<select th:name="|attendanceList[${stat.index}].trainingStartMinute|"
+											class="form-control" th:errorclass="errorInput">
 											<option th:each="trainingStartMinute : ${attendanceForm.trainingMinutes}"
 												th:value="${trainingStartMinute.key}" th:inline="text"
 												class="form-control"
@@ -98,8 +95,7 @@
 								</td>
 								<td class="w240">
 									<div class="form-inline">
-										<!--<select th:name="|attendanceList[${stat.index}].trainingEndHour|"-->
-										<select th:field="*{attendanceList[__${stat.index}__].trainingEndHour}"
+										<select th:name="|attendanceList[${stat.index}].trainingEndHour|"
 											class="form-control" th:errorclass=" errorInput">
 											<option th:each="trainingEndHour : ${attendanceForm.trainingHours}"
 												th:value="${trainingEndHour.key}" th:inline="text" class="form-control"
@@ -109,8 +105,7 @@
 											</option>
 										</select>
 										<span>:</span>
-										<!--<select th:name="|attendanceList[${stat.index}].trainingEndMinute|"-->
-										<select th:field="*{attendanceList[__${stat.index}__].trainingEndMinute}"
+										<select th:name="|attendanceList[${stat.index}].trainingEndMinute|"
 											class="form-control" th:errorclass=" errorInput">
 											<option th:each="trainingEndMinute : ${attendanceForm.trainingMinutes}"
 												th:value="${trainingEndMinute.key}" th:inline="text"

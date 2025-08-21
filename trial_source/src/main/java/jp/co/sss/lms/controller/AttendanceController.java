@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.validation.Valid;
 import jp.co.sss.lms.dto.AttendanceManagementDto;
 import jp.co.sss.lms.dto.LoginUserDto;
 import jp.co.sss.lms.form.AttendanceForm;
@@ -138,7 +140,7 @@ public class AttendanceController {
 	 * @throws ParseException
 	 */
 	@RequestMapping(path = "/update", params = "complete", method = RequestMethod.POST)
-	public String complete(AttendanceForm attendanceForm, Model model, BindingResult result)
+	public String complete(@Valid @ModelAttribute AttendanceForm attendanceForm, BindingResult result, Model model)
 			throws ParseException {
 		
 		//Tak.27
@@ -160,8 +162,10 @@ public class AttendanceController {
 			model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
 
 			//勤怠フォームの生成
-			attendanceForm = studentAttendanceService
-					.setAttendanceForm(attendanceManagementDtoList);
+			//この処理大戦犯
+//			attendanceForm = studentAttendanceService
+//					.setAttendanceForm(attendanceManagementDtoList);
+			attendanceForm = studentAttendanceService.setAttendanceFormValid(attendanceForm, attendanceManagementDtoList);
 			model.addAttribute("attendanceForm", attendanceForm);
 			return "attendance/update";
 		} else {

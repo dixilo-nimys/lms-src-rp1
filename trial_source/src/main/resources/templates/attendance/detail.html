@@ -19,7 +19,7 @@
 	</th:block>
 
 	<h2>勤怠管理</h2>
-
+	
 	<!-- エラーメッセージ -->
 	<th:block th:if="${not #strings.isEmpty(error)}" id="error">
 		<ul style="padding-left: 0; list-style: none;">
@@ -93,12 +93,15 @@
 	
 	<!--Task.25 鈴木文太-->
 	<!-- 勤怠の未入力情報がある場合確認ウィンドウが表示される -->
-	<span>
 		<script th:if="${hasNotEnterCount}">
 			alert('過去日の勤怠に未入力があります。');
 		</script>
-	</span>
+		
+		 <script></script>
+
 
 </body>
+
+
 
 </html>
