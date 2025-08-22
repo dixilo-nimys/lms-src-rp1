@@ -6,6 +6,7 @@
 	<title>勤怠情報変更｜LMS</title>
 </head>
 
+
 <body>
 
 	<th:block th:if="${session.loginUserDto.role == '0001'}">
@@ -39,6 +40,7 @@
 						<tr>
 							<th class="w140">日付</th>
 							<th class="w300">コース内容</th>
+							<th class="w60">定時</th>
 							<th class="w70">出勤</th>
 							<th class="w70">退勤</th>
 							<th class="w80">中抜け時間</th>
@@ -66,6 +68,11 @@
 								</th:block>
 								<td class="w140">[[${dailyAttendanceForm.dispTrainingDate}]]</td>
 								<td class="w300">[[${dailyAttendanceForm.sectionName}]]</td>
+								<!--Task.28-->
+								<!--定時ボタン表示-->
+								<td class="w60">
+									<input type="button" class="btn.btn-success" onclick="assign()" value="定時">
+								</td>
 								<!--Task.26-->
 								<!--出勤時間、退勤時間をプルダウンリスト化-->
 								<td class="w240">
@@ -156,6 +163,16 @@
 			return confirm("更新します。よろしいですか？");
 		}
 	</script>
+	
+	<script>
+  function assign() {
+    //値を挿入
+    document.getElementsByName("|attendanceList[${stat.index}].trainingStartHour|").value = "09";
+    document.getElementsByName("|attendanceList[${stat.index}].trainingStartMinute|").value = "00";
+    document.getElementsByName("|attendanceList[${stat.index}].trainingEndHour|").value = "18";
+    document.getElementsByName("|attendanceList[${stat.index}].trainingEndMinute|").value = "00";
+  }
+  </script>
 
 </body>
 

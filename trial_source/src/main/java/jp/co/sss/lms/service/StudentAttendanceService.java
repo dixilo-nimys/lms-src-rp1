@@ -478,7 +478,11 @@ public class StudentAttendanceService {
 	}
 
 	//Task.25 鈴木文太
-	//勤怠情報の未入力の件数を取得
+	/**
+	 * 勤怠情報の未入力の件数を取得
+	 * @param lmsUserId
+	 * @return 未入力の件数
+	 */
 	public Integer getNotEnterCount(Integer lmsUserId) {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -493,10 +497,15 @@ public class StudentAttendanceService {
 	}
 
 	//	Task.27 鈴木文太
-	//	更新押下時の入力チェック
 	@Autowired
 	private MessageSource messageSource;
-
+	/**
+	 * 更新押下時の入力チェック
+	 * @param attendanceForm
+	 * @param bindingResult
+	 * @return エラーメッセージ
+	 * @throws ParseException
+	 */
 	public BindingResult updateCheck(AttendanceForm attendanceForm, BindingResult bindingResult) throws ParseException {
 		//エラーメッセージを配列を使って格納
 		Set<String> errorList = new HashSet<>();
