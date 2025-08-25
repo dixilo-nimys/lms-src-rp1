@@ -39,12 +39,11 @@
 					<thead>
 						<tr>
 							<th class="w140">日付</th>
-							<th class="w300">コース内容</th>
-							<th class="w60">定時</th>
+							<th class="w220">コース内容</th>
 							<th class="w70">出勤</th>
 							<th class="w70">退勤</th>
-							<th class="w80">中抜け時間</th>
-							<th class="w70">ステータス</th>
+							<th class="w100">中抜け時間</th>
+							<th class="w100">ステータス</th>
 							<th class="w240">備考</th>
 						</tr>
 					</thead>
@@ -70,12 +69,12 @@
 								<td class="w300">[[${dailyAttendanceForm.sectionName}]]</td>
 								<!--Task.28-->
 								<!--定時ボタン表示-->
-								<td class="w60">
-									<input type="button" class="btn.btn-success" onclick="assign()" value="定時">
-								</td>
+<!--								<td class="w60">-->
+<!--									<input type="button" class="btn btn-success default-button" value="定時">-->
+<!--								</td>-->
 								<!--Task.26-->
 								<!--出勤時間、退勤時間をプルダウンリスト化-->
-								<td class="w240">
+								<td class="w200">
 									<div class="form-inline">
 										<select th:name="|attendanceList[${stat.index}].trainingStartHour|"
 											class="form-control" th:errorclass=" errorInput">
@@ -87,7 +86,7 @@
 												<!--[[${trainingStartHour.value}]]-->
 											</option>
 										</select>
-										<span>:</span>
+										<span> : </span>
 										<select th:name="|attendanceList[${stat.index}].trainingStartMinute|"
 											class="form-control" th:errorclass="errorInput">
 											<option th:each="trainingStartMinute : ${attendanceForm.trainingMinutes}"
@@ -100,7 +99,7 @@
 										</select>
 									</div>
 								</td>
-								<td class="w240">
+								<td class="w200">
 									<div class="form-inline">
 										<select th:name="|attendanceList[${stat.index}].trainingEndHour|"
 											class="form-control" th:errorclass=" errorInput">
@@ -111,7 +110,7 @@
 												<!--[[${trainingEndHour.value}]]-->
 											</option>
 										</select>
-										<span>:</span>
+										<span> : </span>
 										<select th:name="|attendanceList[${stat.index}].trainingEndMinute|"
 											class="form-control" th:errorclass=" errorInput">
 											<option th:each="trainingEndMinute : ${attendanceForm.trainingMinutes}"
@@ -167,13 +166,23 @@
 	<script>
   function assign() {
     //値を挿入
-    document.getElementsByName("|attendanceList[${stat.index}].trainingStartHour|").value = "09";
-    document.getElementsByName("|attendanceList[${stat.index}].trainingStartMinute|").value = "00";
-    document.getElementsByName("|attendanceList[${stat.index}].trainingEndHour|").value = "18";
-    document.getElementsByName("|attendanceList[${stat.index}].trainingEndMinute|").value = "00";
+    document.getElementsByName("|attendanceList[${stat.index}].trainingStartHour|").value = "09:00";
+    document.getElementsByName("|attendanceList[${stat.index}].trainingEndHour|").value = "18:00";
   }
   </script>
 
 </body>
 
 </html>
+
+
+
+<!--
+	<select id="dropdown"></select>
+
+<script>
+	function aasign
+  const dropdown = document.getElementByClass('w200');
+  dropdown.value = 'cherry'; // 初期値を "Cherry" に設定
+</script>
+-->

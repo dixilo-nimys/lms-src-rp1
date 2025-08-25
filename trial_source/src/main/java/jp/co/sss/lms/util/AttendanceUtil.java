@@ -157,7 +157,7 @@ public class AttendanceUtil {
 	 */
 	public LinkedHashMap<Integer, String> setTrainingHourMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
-		map.put(null, "");
+		map.put(null, null);
 		for (int i = 0; i < 24; i++) {
 			int Hh = i;
 			String hour;
@@ -179,7 +179,7 @@ public class AttendanceUtil {
 	 */
 	public LinkedHashMap<Integer, String> setTrainingMinuteMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
-		map.put(null, "");
+		map.put(null, null);
 		for (int i = 0; i < 60; i++) {
 			int min = i;
 			String minute;
