@@ -21,8 +21,6 @@
 			</li>
 		</ul>
 	</th:block>
-	<!--	//-->
-
 
 	<th:block th:if="${session.loginUserDto.role != '0001'}">
 		<h2>勤怠管理 <small>( [[${attendanceForm.userName}]] )</small></h2>
@@ -129,7 +127,7 @@
 								</td>
 								<!--Task.26ここまで-->
 								<td class="w120">
-									<select th:name="|attendanceList[${stat.index}].blankTime|" class="form-control">
+									<select th:name="|attendanceList[${stat.index}].blankTime|" class="form-control"  th:errorclass=" errorInput">
 										<option th:each="blankTime : ${attendanceForm.blankTimes}"
 											th:value="${blankTime.key}" th:inlne="text" class="form-control"
 											th:selected="${blankTime.key == dailyAttendanceForm.blankTime}">
@@ -139,7 +137,7 @@
 								<td class="w80">[[${dailyAttendanceForm.statusDispName}]]</td>
 								<td class="w160">
 									<input type="text" th:name="|attendanceList[${stat.index}].note|"
-										th:value="${dailyAttendanceForm.note}" class="form-control"></input>
+										th:value="${dailyAttendanceForm.note}" class="form-control" th:errorclass=" errorInput"></input>
 								</td>
 							</tr>
 						</th:block>

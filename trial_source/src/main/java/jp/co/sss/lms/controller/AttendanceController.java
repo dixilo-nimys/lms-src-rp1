@@ -160,7 +160,8 @@ public class AttendanceController {
 			List<AttendanceManagementDto> attendanceManagementDtoList = studentAttendanceService
 					.getAttendanceManagement(loginUserDto.getCourseId(), loginUserDto.getLmsUserId());
 			model.addAttribute("attendanceManagementDtoList", attendanceManagementDtoList);
-
+			
+			//Task.27 鈴木文太
 			//勤怠フォームの生成
 			attendanceForm = studentAttendanceService.setAttendanceFormValid(attendanceForm, attendanceManagementDtoList);
 			model.addAttribute("attendanceForm", attendanceForm);

@@ -151,11 +151,11 @@ public class AttendanceUtil {
 
 	//Task.26 鈴木文太
 	/**
-	 * 時間マップの取得
+	 * 時間のプルダウンマップを生成
 	 * 
 	 * @return 	時間マップ
 	 */
-	public LinkedHashMap<Integer, String> setTrainingHourMap() {
+	public LinkedHashMap<Integer, String> getHourMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, null);
 		for (int i = 0; i < 24; i++) {
@@ -173,11 +173,11 @@ public class AttendanceUtil {
 	}
 
 	/**
-	 * 分マップの取得
+	 * 分のプルダウンマップを生成
 	 * 
 	 * @return 分マップ
 	 */
-	public LinkedHashMap<Integer, String> setTrainingMinuteMap() {
+	public LinkedHashMap<Integer, String> getMinuteMap() {
 		LinkedHashMap<Integer, String> map = new LinkedHashMap<>();
 		map.put(null, null);
 		for (int i = 0; i < 60; i++) {
@@ -194,10 +194,9 @@ public class AttendanceUtil {
 		return map;
 	}
 	
-	//出勤時間
 	/**
 	 * 時間(時間)を取得
-	 * 
+	 * @param 開始時刻or終了時刻
 	 * @return 数値型時間
 	 */
 	public Integer getHour(String trainingTime) {
@@ -212,7 +211,7 @@ public class AttendanceUtil {
 	
 	/**
 	 * 時間(分)を取得
-	 * 
+	 * @param 開始時刻or終了時刻
 	 * @return 数値型分
 	 */
 	public Integer getMinute(String trainingTime) {
@@ -224,26 +223,5 @@ public class AttendanceUtil {
 		return IntegerMinute;
 	}
 	
-	/**
-	 * 表示用時間(時間)を取得
-	 * 
-	 * @return 表示用時間
-	 */
-	public String getTrainingHourValue(Integer trainingHour) {
-		String StringHour = String.valueOf(trainingHour) ;
-		
-		return StringHour ;
-	}
-	
-	/**
-	 * 表示用時間(分)を取得
-	 * 
-	 * @return 表示用分
-	 */
-	public String getTrainingMinuteValue(Integer trainingMinute) {
-		String StringMinute = String.valueOf(trainingMinute) ;
-		
-		return StringMinute;
-	}
-	
+
 }
