@@ -72,7 +72,7 @@ public interface TStudentAttendanceMapper {
 	 * @param lmsUserId
 	 * @param deleteFlg
 	 * @param trainingDate
-	 * @return
+	 * @return 未入力の個数
 	 */
 	Integer notEnterCount(@Param("lmsUserId") Integer lmsUserId,
 			@Param("deleteFlg") Short deleteFlg, @Param("trainingDate") Date trainingDate);

@@ -231,6 +231,7 @@ public class StudentAttendanceService {
 		//時間マップと分マップの設定
 		attendanceForm.setTrainingHours(attendanceUtil.getHourMap());
 		attendanceForm.setTrainingMinutes(attendanceUtil.getMinuteMap());
+
 		// 途中退校している場合のみ設定
 		if (loginUserDto.getLeaveDate() != null) {
 			attendanceForm
@@ -312,6 +313,7 @@ public class StudentAttendanceService {
 	//Task.27 鈴木文太
 	/**
 	 * エラー発生時 時間マップ 分マップ 中抜け時間を取得する処理
+	 * 
 	 * @param attendanceForm
 	 * @param attendanceManagementDtoList
 	 * @return 勤怠フォーム
@@ -483,6 +485,7 @@ public class StudentAttendanceService {
 	//Task.25 鈴木文太
 	/**
 	 * 勤怠情報の未入力の件数を取得
+	 * 
 	 * @param lmsUserId
 	 * @return 未入力の件数
 	 */
@@ -505,6 +508,7 @@ public class StudentAttendanceService {
 
 	/**
 	 * 更新押下時の入力チェック
+	 * 
 	 * @param attendanceForm
 	 * @param bindingResult
 	 * @return エラーメッセージ
@@ -553,7 +557,8 @@ public class StudentAttendanceService {
 					String[] str = { messageSource.getMessage("placeNote", new String[] {}, Locale.getDefault()),
 							"100" };
 					String error = messageUtil.getMessage(Constants.VALID_KEY_MAXLENGTH, str);
-					FieldError fieldError = new FieldError(bindingResult.getObjectName(), "attendanceList[" + index + "].note", error);
+					FieldError fieldError = new FieldError(bindingResult.getObjectName(),
+							"attendanceList[" + index + "].note", error);
 					bindingResult.addError(fieldError);
 					errorList.add(error);
 				}

@@ -24,7 +24,7 @@ public class AttendanceUtil {
 	private DateUtil dateUtil;
 	@Autowired
 	private MSectionMapper mSectionMapper;
-	
+
 	/**
 	 * SSS定時・出退勤時間を元に、遅刻早退を判定をする
 	 * 
@@ -193,22 +193,22 @@ public class AttendanceUtil {
 		}
 		return map;
 	}
-	
+
 	/**
 	 * 時間(時間)を取得
 	 * @param 開始時刻or終了時刻
 	 * @return 数値型時間
 	 */
 	public Integer getHour(String trainingTime) {
-		
+
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 		LocalTime time = LocalTime.parse(trainingTime, formatter);
 
 		Integer IntegerHour = time.getHour();
-		
+
 		return IntegerHour;
 	}
-	
+
 	/**
 	 * 時間(分)を取得
 	 * @param 開始時刻or終了時刻
@@ -219,9 +219,8 @@ public class AttendanceUtil {
 		LocalTime time = LocalTime.parse(trainingTime, formatter);
 
 		Integer IntegerMinute = time.getMinute();
-		
+
 		return IntegerMinute;
 	}
-	
 
 }

@@ -46,7 +46,7 @@ public class DailyAttendanceForm {
 	private String courseName;
 	/** インデックス */
 	private String index;
-	
+
 	//Task.26 鈴木文太
 	/** 出勤時間(時間) */
 	private Integer trainingStartHour;
