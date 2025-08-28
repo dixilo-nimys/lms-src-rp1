@@ -643,7 +643,7 @@ public class StudentAttendanceService {
 					}
 
 				}
-				//中抜き時間が勤務時間を上回っている場合
+				//中抜け時間が勤務時間を上回っている場合
 				//中抜け時間が勤務時間を超えています。
 				int hour;
 				int minute;
